@@ -184,6 +184,12 @@ const handleFormSubmission = (event) => {
             showError("All fields are required!", formError, formSuccess);
             return;
         }
+        const sqlPattern = /\b(SELECT|INSERT|UPDATE|DELETE|DROP|TRUNCATE|--)\b/i;
+
+        if (sqlPattern.test(title) || sqlPattern.test(description)) {
+        showError("SQL keywords are not allowed in title or description.", formError, formSuccess);
+        return;
+        }
         
         // ✅ Add these debugging logs before creating the project object
         console.log("Attempting to add new project...");

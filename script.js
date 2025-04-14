@@ -6,6 +6,7 @@ function filterProjects(category) {
   const filtered = projects.filter(p => category === 'All' || p.category === category);
   displayFilteredProjects(filtered);
 }
+window.filterProjects = filterProjects;
 // Sprint A3 Part 1: Ensure DOM is fully loaded before executing scripts
 document.addEventListener('DOMContentLoaded', () => {
     try {

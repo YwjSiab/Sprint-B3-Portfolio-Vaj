@@ -345,7 +345,11 @@ const addProjectForm = () => {
         form.appendChild(submitButton);
 
         // Append form to the container
-        formContainer.appendChild(form);
+        if (form) {
+            form.addEventListener('submit', handleFormSubmission);
+        } else {
+            console.warn("⚠️ No 'projectForm' found on this page. Skipping project submission listener.");
+        }
 
         // Add event listener for form submission
         form.addEventListener('submit', handleFormSubmission);

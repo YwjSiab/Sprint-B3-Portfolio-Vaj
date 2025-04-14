@@ -22,13 +22,6 @@ if (contactForm) {
                 return;
             }
 
-            const sqlPattern = /\b(SELECT|INSERT|UPDATE|DELETE|DROP|TRUNCATE|--)\b/i;
-
-            if (sqlPattern.test(name) || sqlPattern.test(message)) {
-            showError("SQL keywords are not allowed in title or message.", formError, formSuccess);
-            return;
-            }
-
             if (!submittedToken || submittedToken !== storedToken) {
                 alert("CSRF token mismatch. Submission blocked.");
                 return;
@@ -40,6 +33,13 @@ if (contactForm) {
                 if (formError) {formError.innerText = errorMsg;}
                 if (formSuccess) {formSuccess.innerText = '';} // Clear success message
             };
+
+            const sqlPattern = /\b(SELECT|INSERT|UPDATE|DELETE|DROP|TRUNCATE|--)\b/i;
+
+            if (sqlPattern.test(name) || sqlPattern.test(message)) {
+            showError("SQL keywords are not allowed in title or message.", formError, formSuccess);
+            return;
+            }
 
             // Validate name making sure it only takes letters and spaces.
             const nameRegex = /^[A-Za-z\s]+$/;

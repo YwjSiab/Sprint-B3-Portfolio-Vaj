@@ -246,7 +246,14 @@ const handleFormSubmission = (event) => {
 
         // Store and display project
         projects.push(newProject);
-        displayProjects();
+        const filterDropdown = document.getElementById('filterDropdown');
+        const selectedCategory = filterDropdown ? filterDropdown.value : 'All';
+
+        // Refresh display using the current filter (from global filterProjects)
+        if (typeof window.filterProjects === "function") {
+            window.filterProjects(selectedCategory);
+        }
+
 
         // Show success message and reset form
         showSuccess("Project added successfully!", formSuccess);
